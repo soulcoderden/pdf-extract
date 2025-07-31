@@ -25,3 +25,7 @@ regex_patterns:
 fuzzy_terms:
   - approximately
   - about
+  - around
+  - roughly
+  - nearly
+  - "close to"

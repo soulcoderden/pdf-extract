@@ -27,10 +27,11 @@ The function `segment_sentences(text)` splits PDF text into sentences using spaC
 
 ## Example
 
-Running `main.py` processes an input file and prints detected durations. For example:
+Running `main.py` processes any PDF files located in the `data/` directory and
+prints detected durations. For example:
 
 ```bash
-python main.py sample.pdf
+python main.py
 ```
 
 Sample output when a match is found:
@@ -40,3 +41,10 @@ Found duration: "12 months" at page 2
 ```
 
 This indicates the text "12 months" was extracted and matched on the second page of the PDF.
+
+## Rule Engine
+
+The engine first checks literal patterns, then regex expressions. If neither match, it looks for fuzzy terms such as "about" or "roughly". Each matcher is implemented in its own module under `stockcall_duration_extractor/extractor/matchers/`.
+
+Fuzzy phrases are defined in `pattern_store/patterns_library.yaml` and can be
+extended by adding new entries under the `fuzzy_terms` section.
