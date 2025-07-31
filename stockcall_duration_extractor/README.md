@@ -1,7 +1,14 @@
 # stockcall_duration_extractor
 
-This tool extracts text from PDF files. The first milestone includes a simple script that reads an example PDF and saves the extracted text.
+This tool extracts text from PDF files. It now also demonstrates sentence segmentation using spaCy.
 
 ## Usage
 
-Run `python main.py` to extract text from `data/example.pdf` and save it to `outputs/extracted_text.txt`.
+First install the dependencies:
+
+```bash
+pip install -r requirements.txt
+python -m spacy download en_core_web_sm
+```
+
+Then run `python main.py` to extract text from `data/example.pdf` and save it to `outputs/extracted_text.txt`.

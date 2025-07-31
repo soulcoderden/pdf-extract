@@ -1,6 +1,7 @@
 from pathlib import Path
 
 from extractor.pdf_handler import extract_text_from_pdf
+from extractor.text_cleaner import segment_sentences
 
 
 def main():
@@ -9,8 +10,10 @@ def main():
 
     text = extract_text_from_pdf(str(pdf_path))
 
-    # Print the first 500 characters
-    print(text[:500])
+    # Split into sentences and print with line numbers
+    sentences = segment_sentences(text)
+    for idx, sentence in enumerate(sentences, start=1):
+        print(f"{idx:>3}: {sentence}")
 
     # Ensure output directory exists
     output_path.parent.mkdir(parents=True, exist_ok=True)
