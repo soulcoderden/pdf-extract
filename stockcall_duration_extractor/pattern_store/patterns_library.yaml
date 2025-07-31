@@ -15,6 +15,10 @@ literal_patterns:
     normalized_value: 12
     unit: month
     confidence: 1.0
+  - pattern: "12-month"
+    normalized_value: 12
+    unit: month
+    confidence: 0.9
 regex_patterns:
   - pattern: "(\\d+)\\s*(months?|quarters?|years?)"
     confidence: 0.8
