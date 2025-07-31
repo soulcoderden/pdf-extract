@@ -2,7 +2,7 @@ from pathlib import Path
 
 from extractor.pdf_handler import extract_text_from_pdf
 from extractor.text_cleaner import segment_sentences
-from rule_engine import match_duration_patterns
+from extractor.rule_engine import match_duration_patterns
 
 
 def main():
@@ -28,4 +28,4 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    main() 
