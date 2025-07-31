@@ -1,0 +1,23 @@
+literal_patterns:
+  - pattern: "one quarter"
+    normalized_value: 1
+    unit: quarter
+    confidence: 1.0
+  - pattern: "two quarters"
+    normalized_value: 2
+    unit: quarter
+    confidence: 0.9
+  - pattern: "half year"
+    normalized_value: 6
+    unit: month
+    confidence: 0.9
+  - pattern: "fiscal year"
+    normalized_value: 12
+    unit: month
+    confidence: 1.0
+regex_patterns:
+  - pattern: "(\\d+)\\s*(months?|quarters?|years?)"
+    confidence: 0.8
+fuzzy_terms:
+  - approximately
+  - about
