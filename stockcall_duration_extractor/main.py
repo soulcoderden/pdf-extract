@@ -1,57 +1,31 @@
-from pathlib import Path
-
-from extractor.pdf_handler import extract_text_from_pdf
-from extractor.text_cleaner import segment_sentences
-from extractor.rule_engine import match_duration_patterns
-
+from core.worker import process_pdf_file
 
 def main():
-    data_dir = Path(__file__).parent / "data"
-    output_dir = Path(__file__).parent / "outputs"
+    """Main function that processes a PDF and prints both original and filtered duration lines."""
     
-    # Ensure output directory exists
-    output_dir.mkdir(parents=True, exist_ok=True)
+    # PDF file to process
+    target_pdf = "20250731090635_Avenue-Supermarts_31072025_Motilal-Oswal.pdf"
     
-    # Get all PDF files in the data directory
-    pdf_files = list(data_dir.glob("*.pdf"))
+    # Process the PDF file
+    result = process_pdf_file(target_pdf)
     
-    if not pdf_files:
-        print("No PDF files found in data directory")
-        return
+    # Print original lines (without sentence filtering)
+    print("=== ORIGINAL DURATION LINES (No Sentence Filtering) ===")
+    print(f"Total lines found: {len(result['original'])}")
+    print("-" * 60)
+    for i, line in enumerate(result['original'], 1):
+        print(f"{i}. \"{line}\"")
     
-    print(f"Found {len(pdf_files)} PDF file(s) to process:")
-    for pdf_file in pdf_files:
-        print(f"  - {pdf_file.name}")
-    print()
+    print("\n" + "="*80 + "\n")
     
-    for pdf_file in pdf_files:
-        print(f"Processing: {pdf_file.name}")
-        print("=" * 50)
-        
-        try:
-            text = extract_text_from_pdf(str(pdf_file))
-            
-            # Split into sentences and print with line numbers
-            sentences = segment_sentences(text)
-            for idx, sentence in enumerate(sentences, start=1):
-                print(f"{idx:>3}: {sentence}")
-            
-            match = match_duration_patterns(sentences)
-            if match:
-                print(f"\nMatch found: {match}")
-            else:
-                print("\nNo match found")
-            
-            # Save extracted text to output file
-            output_file = output_dir / f"{pdf_file.stem}_extracted.txt"
-            output_file.write_text(text, encoding="utf-8")
-            print(f"Text saved to: {output_file}")
-            
-        except Exception as e:
-            print(f"Error processing {pdf_file.name}: {e}")
-        
-        print("\n" + "=" * 50 + "\n")
-
+    # Print filtered lines (with sentence filtering)
+    print("=== FILTERED DURATION LINES (With Sentence Filtering) ===")
+    print(f"Total lines found: {len(result['filtered'])}")
+    print("-" * 60)
+    for i, line in enumerate(result['filtered'], 1):
+        print(f"{i}. \"{line}\"")
+    
+    print(f"\nFiltering removed {len(result['original']) - len(result['filtered'])} lines")
 
 if __name__ == "__main__":
     main() 

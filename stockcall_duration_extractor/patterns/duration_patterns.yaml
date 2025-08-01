@@ -1,0 +1,42 @@
+# Duration patterns for stock recommendation analysis
+patterns:
+  # Pattern 1: Price Target (PT) or recommendation linked to fiscal year
+  - pattern: ".*(?:PT|Price Target|Target Price|Buy|Sell|Hold|Outperform|Underperform).*FY\\d{2,4}E?"
+    description: "Price targets and recommendations with fiscal years"
+    
+  # Pattern 2: General time references
+  - pattern: ".*FY\\d{2,4}E?.*"
+    description: "Fiscal years (with or without E for estimated)"
+    
+  - pattern: ".*Q\\dFY\\d{2,4}.*"
+    description: "Quarters with fiscal years"
+    
+  - pattern: ".*next\\s+\\d+\\s+years?.*"
+    description: "Multi-year timeframes"
+    
+  - pattern: ".*coming\\s+\\d+\\s+years?.*"
+    description: "Coming years"
+    
+  - pattern: ".*within\\s+\\d+\\s+(?:months?|quarters?|years?).*"
+    description: "Within timeframes"
+    
+  - pattern: ".*by\\s+(?:Q\\d|FY\\d|next|end).*"
+    description: "By specific time"
+    
+  - pattern: ".*expected\\s+to.*(?:FY\\d|Q\\d|next|within).*"
+    description: "Expected timeframes"
+    
+  - pattern: ".*guidance.*(?:FY\\d|Q\\d|next|within).*"
+    description: "Guidance with time"
+    
+  - pattern: ".*forecast.*(?:FY\\d|Q\\d|next|within).*"
+    description: "Forecast with time"
+    
+  - pattern: ".*projection.*(?:FY\\d|Q\\d|next|within).*"
+    description: "Projection with time"
+    
+  - pattern: ".*target.*(?:FY\\d|Q\\d|next|within).*"
+    description: "Target with time"
+    
+  - pattern: ".*outlook.*(?:FY\\d|Q\\d|next|within).*"
+    description: "Outlook with time" 
